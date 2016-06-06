@@ -6,8 +6,13 @@ var ReactDOM = require('react-dom');
 var StorePicker = React.createClass({
 
 	render: function() {
+		var name = 'wes';
 		return (
-			<p>Hi</p>
+			<form className="store-selector">
+				<h2>Please Enter A Store</h2>
+				<input type="text" ref="storeId" required />
+				<input type="submit" />
+			</form>
 		)
 	}
 });
