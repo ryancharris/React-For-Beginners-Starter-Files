@@ -1,5 +1,12 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+const React = require('react');
+const ReactDOM = require('react-dom');
+
+// React Router requirements
+const ReactRouter = require('react-router');
+const Router = ReactRouter.Router;
+const Route = ReactRouter.Route;
+const Navigation= ReactRouter.Navigation;
+const createBrowserHistory = require('history/lib/createBrowserHistory');
 
 // App component
 // i.e. <App />
@@ -8,7 +15,7 @@ class App extends React.Component {
 		return (
 			<div className="catch-of-the-day">
 				<div className="menu">
-					<Header />
+					<Header tagline="Fresh Seafood Market" />
 				</div>
 				<Order />
 				<Inventory />
@@ -22,7 +29,15 @@ class App extends React.Component {
 class Header extends React.Component {
 	render() {
 		return (
-			<p>Header</p>
+			<header className="top">
+				<h1>Catch 
+					<span className="ofThe">
+						<span className="of">of</span>
+						<span className="the">the</span>
+					</span>
+					Day</h1>
+				<h3 className="tagline"><span>{this.props.tagline}</span></h3>
+			</header>
 		)
 	}
 }
@@ -51,7 +66,6 @@ class Inventory extends React.Component {
 // i.e. <StorePicker />
 class StorePicker extends React.Component {
 	render() {
-		var name = 'wes';
 		return (
 			<form className="store-selector">
 				<h2>Please Enter A Store</h2>
@@ -62,4 +76,27 @@ class StorePicker extends React.Component {
 	}
 }
 
-ReactDOM.render(<App  />, document.querySelector('#main'));
+/*
+	Not Found
+*/
+class NotFound extends React.Component {
+	render() {
+		return (
+			<h1>Not Found</h1>
+		)
+	}
+}
+
+/*
+	Routes
+*/
+
+const routes = (
+	<Router history={createBrowserHistory()}>
+		<Route path="/" component={StorePicker} />
+		<Route path="/store/:storeId" component={App} />
+		<Route path="*" component={NotFound} />
+	</Router>
+)
+
+ReactDOM.render(routes, document.querySelector('#main'));
