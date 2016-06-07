@@ -1,11 +1,56 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+// App component
+// i.e. <App />
+class App extends React.Component {
+	render() {
+		return (
+			<div className="catch-of-the-day">
+				<div className="menu">
+					<Header />
+				</div>
+				<Order />
+				<Inventory />
+			</div>
+		)
+	}
+}
+
+// Header component
+// i.e. <Header />
+class Header extends React.Component {
+	render() {
+		return (
+			<p>Header</p>
+		)
+	}
+}
+
+// Orders component
+// i.e. <Order />
+class Order extends React.Component {
+	render() {
+		return (
+			<p>Orders</p>
+		)
+	}
+}
+
+// Inventory component
+// i.e. <Inventory />
+class Inventory extends React.Component {
+	render() {
+		return (
+			<p>Inventory</p>
+		)
+	}
+}
+
 // Store picker
 // i.e. <StorePicker />
-var StorePicker = React.createClass({
-
-	render: function() {
+class StorePicker extends React.Component {
+	render() {
 		var name = 'wes';
 		return (
 			<form className="store-selector">
@@ -15,6 +60,6 @@ var StorePicker = React.createClass({
 			</form>
 		)
 	}
-});
+}
 
-ReactDOM.render(<StorePicker />, document.querySelector('#main'));
+ReactDOM.render(<App  />, document.querySelector('#main'));
