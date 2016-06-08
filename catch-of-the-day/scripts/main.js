@@ -9,11 +9,13 @@ const Navigation = ReactRouter.Navigation;
 const History = ReactRouter.History;
 const createBrowserHistory = require('history/lib/createBrowserHistory');
 
+// Helper functions
 const h = require('./helpers');
 
-// App component
-// i.e. <App />
-class App extends React.Component {
+/*
+	App
+*/
+var App = React.createClass({
 	render() {
 		return (
 			<div className="catch-of-the-day">
@@ -25,11 +27,12 @@ class App extends React.Component {
 			</div>
 		)
 	}
-}
+})
 
-// Header component
-// i.e. <Header />
-class Header extends React.Component {
+/*
+	Header
+*/
+var Header = React.createClass({
 	render() {
 		return (
 			<header className="top">
@@ -43,37 +46,42 @@ class Header extends React.Component {
 			</header>
 		)
 	}
-}
+})
 
-// Orders component
-// i.e. <Order />
-class Order extends React.Component {
+/*
+	Orders
+*/
+var Order = React.createClass({
 	render() {
 		return (
 			<p>Orders</p>
 		)
 	}
-}
+})
 
-// Inventory component
-// i.e. <Inventory />
-class Inventory extends React.Component {
+/* 
+	Inventory
+*/
+var Inventory = React.createClass({
 	render() {
 		return (
 			<p>Inventory</p>
 		)
 	}
-}
+})
 
-// Store picker
-// i.e. <StorePicker />
+/*
+	StorePicker
+*/
 var StorePicker = React.createClass({
 	mixins: [History],
 
   goToStore : function(event) {
     event.preventDefault();
+
     // get the data from the input
     var storeId = this.refs.storeId.value;
+    // use it to change the URL w/o reloading page
  	 this.history.pushState(null, '/store/' + storeId);
   },
 
@@ -92,13 +100,13 @@ var StorePicker = React.createClass({
 /*
 	Not Found
 */
-class NotFound extends React.Component {
-	render() {
+var NotFound = React.createClass({
+	render : function() {
 		return (
 			<h1>Not Found</h1>
 		)
 	}
-}
+})
 
 /*
 	Routes
