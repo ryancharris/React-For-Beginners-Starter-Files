@@ -5,7 +5,8 @@ const ReactDOM = require('react-dom');
 const ReactRouter = require('react-router');
 const Router = ReactRouter.Router;
 const Route = ReactRouter.Route;
-const Navigation= ReactRouter.Navigation;
+const Navigation = ReactRouter.Navigation;
+const History = ReactRouter.History;
 const createBrowserHistory = require('history/lib/createBrowserHistory');
 
 const h = require('./helpers');
@@ -66,17 +67,27 @@ class Inventory extends React.Component {
 
 // Store picker
 // i.e. <StorePicker />
-class StorePicker extends React.Component {
-	render() {
-		return (
-			<form className="store-selector">
-				<h2>Please Enter A Store</h2>
-				<input type="text" ref="storeId" defaultValue={h.getFunName()} required />
-				<input type="submit" />
-			</form>
-		)
-	}
-}
+var StorePicker = React.createClass({
+	mixins: [History],
+
+  goToStore : function(event) {
+    event.preventDefault();
+    // get the data from the input
+    var storeId = this.refs.storeId.value;
+ 	 this.history.pushState(null, '/store/' + storeId);
+  },
+
+  render : function() {
+    return (
+      <form className="store-selector" onSubmit={this.goToStore}>
+        <h2>Please Enter A Store</h2>
+        <input type="text" ref="storeId" defaultValue={h.getFunName()} required />
+        <input type="Submit" />
+      </form>
+    )
+  }
+
+});
 
 /*
 	Not Found
