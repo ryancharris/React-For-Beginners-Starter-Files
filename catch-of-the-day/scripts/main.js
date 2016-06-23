@@ -14,7 +14,7 @@ const h = require('./helpers');
 
 // Firebase
 const Rebase = require('re-base');
-const base = Rebase.createClass('https://catch-of-the-day-49340.firebaseio.com/');
+const base = Rebase.createClass('https://catch-of-the-day.firebaseio.com/');
 
 /*
 	App -- <App />
@@ -32,6 +32,18 @@ var App = React.createClass({
 			context: this,
 			state: 'fishes'
 		});
+
+		var localStorageRef = localStorage.getItem('order-' + this.props.params.storeId);
+
+		if (localStorageRef) {
+			this.setState({
+				order: JSON.parse(localStorageRef)
+			});
+		}
+	},
+
+	componentWillUpdate : function(nextProps, nextState) {
+		localStorage.setItem('order-' + this.props.params.storeId, JSON.stringify(nextState.order));
 	},
 
 	addToOrder : function(key) {
@@ -175,7 +187,7 @@ var Order = React.createClass({
 		}
 
 		return (
-			<li>
+			<li key={key}>
 				{count}lbs.
 				{fish.name}
 				<span className="price">{h.formatPrice(count * fish.price)}</span>
